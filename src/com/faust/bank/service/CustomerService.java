@@ -26,5 +26,16 @@ public class CustomerService {
         AccountDao.getInstance().addAccount(new AccountFactory().createAccount(type, acc_n, init_balance, loc, i_r, this.c));
     }
 
+    public Client getC() {
+        return c;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setC(Client c) {
+        this.c = c;
+    }
 }
 

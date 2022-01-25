@@ -9,10 +9,10 @@ public class AccountFactory {
     public Account createAccount(String type, Integer acc_n, Double init_balance, Double loc, Double i_r, Client client) {
         Account acc = null;
         switch (type) {
-            case "Mortage":
+            case "mortage":
                 acc = new MortageAccount(acc_n, init_balance, client,loc);
                 break;
-            case "Savings":
+            case "savings":
                 acc = new SavingAccount(acc_n, init_balance, client, i_r);
                 break;
         }

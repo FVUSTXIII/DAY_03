@@ -25,8 +25,6 @@ public class CustomerDao {
         Client aux = null;
         if (customers.containsKey(customer_id)) {
             aux = customers.get(customer_id);
-        } else {
-            System.out.println("Client not found!");
         }
         return aux;
     }
