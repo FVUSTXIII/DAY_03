@@ -1,5 +1,6 @@
 package com.faust.bank.service;
 
+import com.faust.bank.Factory.TransactionFactory;
 import com.faust.bank.dao.TransactionDao;
 import com.faust.bank.model.*;
 
@@ -8,9 +9,8 @@ public class TransactionService {
 
     }
     public void excecTransaction(Integer id,Account sender, Account receiver, double amount, String transaction_type, String date) {
-
+        Transaction aux = new TransactionFactory(sender, receiver, id, amount, date).createTransaction();
         if (sender instanceof CreditAccount) {
-            CreditTransaction aux = new CreditTransaction(id, receiver.getAccount_number(), sender.getAccount_number(), amount, date);
             switch (transaction_type) {
                 case "PWC": //Pay with credit
                     if (aux.transaction_behavior instanceof CreditTransactionBehavior) {
@@ -32,7 +32,6 @@ public class TransactionService {
                     break;
             }
         } else if (sender instanceof DebitAccount) {
-            DebitTransaction aux = new DebitTransaction(id, receiver.getAccount_number(), sender.getAccount_number(),amount, date);
             switch (transaction_type) {
                 case "WFD":
                     if (aux.transaction_behavior instanceof DebitTransactionBehavior) {

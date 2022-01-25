@@ -43,6 +43,7 @@ public final class AccountDao {
 
     public void deleteAccount(Account accnt_to_delete) {
         accounts.remove(accnt_to_delete.getAccount_number());
+        accnt_to_delete.getCustomer().getAccounts_owned().remove(accnt_to_delete);
         System.out.println("The account: " + accnt_to_delete.getAccount_number() + " has been deleted successfully.");
     }
 
