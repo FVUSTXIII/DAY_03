@@ -2,6 +2,8 @@ package com.faust.bank.model;
 
 import com.faust.bank.service.DebitTransactionable;
 
+import java.util.Date;
+
 public class DebitTransactionBehavior implements DebitTransactionable {
     DebitAccount host;
 
@@ -31,8 +33,13 @@ public class DebitTransactionBehavior implements DebitTransactionable {
     public void transferirACuenta(Account receiver_account, double amount) {
         double amnt = withdrawAmnt(amount);
         if (amnt > 0.00) {
-            receiver_account.setBalance(receiver_account.getBalance() + amount);
+            if (receiver_account instanceof CreditAccount) {
+                receiver_account.setBalance(receiver_account.getBalance() - amount);
+            } else if (receiver_account instanceof DebitAccount) {
+                receiver_account.setBalance(receiver_account.getBalance() + amount);
+            }
         }
+        ActualizarSaldo(amount);
     }
 
     @Override

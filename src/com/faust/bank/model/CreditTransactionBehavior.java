@@ -1,5 +1,6 @@
 package com.faust.bank.model;
 
+import com.faust.bank.dao.AccountDao;
 import com.faust.bank.service.CreditTransactionable;
 
 public class CreditTransactionBehavior implements CreditTransactionable {

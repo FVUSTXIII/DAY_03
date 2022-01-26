@@ -22,10 +22,9 @@ public class TransactionService {
                     break;
                 case "PCB": //Pay balance
                     if (aux.transaction_behavior instanceof CreditTransactionBehavior) {
-                        ((CreditTransactionBehavior) aux.transaction_behavior).payUpDebt(amount);
-                        TransactionDao.getInstance().addTransaction(aux);
-                        aux.getSender_account().getCustomer().addTransaction(aux);
-                        aux.getReceiver_account().getCustomer().addTransaction(aux);
+                            ((CreditTransactionBehavior) aux.transaction_behavior).payUpDebt(amount);
+                            TransactionDao.getInstance().addTransaction(aux);
+                            aux.getReceiver_account().getCustomer().addTransaction(aux);
                     }
                     break;
                 default:
@@ -33,28 +32,33 @@ public class TransactionService {
             }
         } else if (sender instanceof DebitAccount) {
             switch (transaction_type) {
-                case "WFD":
+                case "WFD": // WITHDRAW FROM DEBIT
                     if (aux.transaction_behavior instanceof DebitTransactionBehavior) {
                         ((DebitTransactionBehavior) aux.transaction_behavior).withdrawAmnt(amount);
                         TransactionDao.getInstance().addTransaction(aux);
                         aux.getReceiver_account().getCustomer().addTransaction(aux);
-                        aux.getSender_account().getCustomer().addTransaction(aux);
                     }
                     break;
-                case "DTD":
+                case "DTD": // DEPOSIT TO DEBIT
                     if (aux.transaction_behavior instanceof DebitTransactionBehavior) {
                         ((DebitTransactionBehavior) aux.transaction_behavior).depositAmnt(amount);
                         TransactionDao.getInstance().addTransaction(aux);
                         aux.getReceiver_account().getCustomer().addTransaction(aux);
-                        aux.getSender_account().getCustomer().addTransaction(aux);
                     }
                     break;
-                case "PTD":
+                case "PTD": // PAY TO DEBIT
                     if (aux.transaction_behavior instanceof DebitTransactionBehavior) {
                        aux.transaction_behavior.transferirACuenta(aux.getReceiver_account(), amount);
                         TransactionDao.getInstance().addTransaction(aux);
                         aux.getReceiver_account().getCustomer().addTransaction(aux);
                         aux.getSender_account().getCustomer().addTransaction(aux);
+                    }
+                    break;
+                case "PFDTC":
+                    if (receiver instanceof CreditAccount) {
+                        if (aux.transaction_behavior instanceof  CreditTransactionBehavior) {
+
+                        }
                     }
                     break;
                 default:
